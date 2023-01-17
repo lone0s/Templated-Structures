@@ -92,11 +92,13 @@ int main() {
     cout << queue2 << endl;
     queue2.add(*new Successor(3,3));
     cout << queue2 << endl;
+    queue2.add(*new Successor(3,5));
+    cout << queue2 << endl;
     queue2.add(*new Successor(7,7));
     cout << queue2 << endl;
     queue2.add(*new Successor(-1,-1));
     cout << queue2 << endl;
-    cout << queue2.pop() << endl;
+/*    cout << queue2.pop() << endl;
     cout << queue2 << endl;
     cout << queue2.pop() << endl;
     cout << queue2 << endl;
@@ -108,6 +110,6 @@ int main() {
         cout << queue2.pop() << endl;
     } catch (exception& e) {
         cout << "Catched this: " << e.what() << endl;
-    }
+    }*/
     return 0;
 }

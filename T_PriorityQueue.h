@@ -9,7 +9,7 @@ template <typename T>
 
 class T_PriorityQueue {
 private:
-    T_Node<T> *start;
+    T_Node<T> *start; //Code modulaire lol
     /*** Methodes implémentant le tri par tas ***/
     void heapify(size_t indexMin, size_t indexMax);
     void heapSort(size_t index);
@@ -70,7 +70,7 @@ void T_PriorityQueue<T>::heapify(size_t indexMin, size_t indexMax) {
 template<typename T>
 void T_PriorityQueue<T>::heapSort(size_t index) {
     for (int i = index / 2 - 1; i >= 0; --i)
-        heapify(index, i);
+        heapify(i, index);
     for (int i = index - 1; i >= 0; --i) {
         std::swap(this -> start->getData()[0],this -> start->getData()[i]);
         heapify(0, i);
