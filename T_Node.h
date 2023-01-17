@@ -49,6 +49,8 @@ public:
         return data;
     }
 
+    void remove(size_t index);
+
 };
 
 /*!!!!!!!!!! Fonction qui coute cher !!!!!!!!!!*/
@@ -102,4 +104,24 @@ void T_Node<T>::add(const T_Node<T> &node) {
     //On le retourne a la liste
     this -> data = newArr;
     this -> size = newSize;
+}
+
+template<typename T>
+void T_Node<T>::remove(size_t i){
+    if(i >= 0 && i < size){
+        size_t newSize = this -> size - 1;
+        T* newArr = new T[newSize];
+        for(size_t j = 0 ; j < i ; ++j)
+            newArr[j] = this ->get(j);
+        for(size_t j = i ; j < newSize ; ++j)
+            newArr[j] = this ->get(j+1);
+        if (data)
+            //On supprime l'ancien
+            delete[] data;
+        //On le retourne a la liste
+        this -> data = newArr;
+        this -> size = newSize;
+    }
+    else
+        throw std::invalid_argument("Indice incorrect par rapport a la taille de la liste\n");
 }

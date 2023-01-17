@@ -3,6 +3,7 @@
 #include "T_List.h"
 #include "Sommet.h"
 #include "Graph.h"
+#include "T_PriorityQueue.h"
 
 template <typename T>
 void heapify(T array[], size_t i, size_t n ) {
@@ -68,14 +69,45 @@ int main() {
     T_List<Sommet> listeSommet;
     listeSommet.add(sommet);
     listeSommet.add(sommet2);
-    graph.addSommets(listeSommet);*/
+    graph.addSommets(listeSommet);*//*
     int arr[5] {1,2,3,4,5};
     int arrInv[5] {5,4,3,2,1};
     T_List<int> list(5,arrInv);
     cout << "Data before heap sort: " << list  << endl;
     heapSort(arrInv,5);
     T_List<int> listbis(5,arrInv);
-    cout << "Data after heap sort: " << listbis << endl;
-    return 0;
+    cout << "Data after heap sort: " << listbis << endl;*/
 
+
+    T_PriorityQueue<int> queue;
+    queue.add(5);
+    cout << queue << endl;
+    queue.add(3);
+    cout << queue << endl;
+    queue.add(7);
+    cout << queue << endl;
+
+    T_PriorityQueue<Successor> queue2;
+    queue2.add(*new Successor(5,5));
+    cout << queue2 << endl;
+    queue2.add(*new Successor(3,3));
+    cout << queue2 << endl;
+    queue2.add(*new Successor(7,7));
+    cout << queue2 << endl;
+    queue2.add(*new Successor(-1,-1));
+    cout << queue2 << endl;
+    cout << queue2.pop() << endl;
+    cout << queue2 << endl;
+    cout << queue2.pop() << endl;
+    cout << queue2 << endl;
+    cout << queue2.pop() << endl;
+    cout << queue2 << endl;
+    cout << queue2.pop() << endl;
+    cout << queue2 << endl;
+    try {
+        cout << queue2.pop() << endl;
+    } catch (exception& e) {
+        cout << "Catched this: " << e.what() << endl;
+    }
+    return 0;
 }

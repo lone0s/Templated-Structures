@@ -46,6 +46,10 @@ namespace Dijkstra_Successor {
             ostream << "[successeur : " << successor.getSuccessorId() << " | cout : " << successor.weight << "]";
             return ostream;
         };
+
+        bool operator > (const Successor& successor) const {
+            return this -> weight > successor.weight;
+        }
     };
 
 }
