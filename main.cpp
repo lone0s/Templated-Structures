@@ -1,34 +1,9 @@
 #include <iostream>
 
-#include "T_List.h"
+#include "Templated_List/T_List.h"
 #include "Sommet.h"
 #include "Graph.h"
-#include "T_PriorityQueue.h"
-
-template <typename T>
-void heapify(T array[], size_t i, size_t n ) {
-    size_t left = i * 2 + 1;
-    size_t right = i * 2 + 2;
-    size_t largest = i;
-    if (left < n && array[left] > array[largest])
-        largest = left;
-    if (right < n && array[right] > array[largest])
-        largest = right;
-    if (largest != i) {
-        std::swap(array[i],array[largest]);
-        heapify(array, n, largest);
-    }
-}
-
-template<typename T>
-void heapSort(T array[], size_t n) {
-    for (int i = n / 2 - 1; i >= 0; --i)
-        heapify(array, i, n);
-    for (int i = n - 1; i >= 0; --i) {
-        std::swap(array[0],array[i]);
-        heapify(array, 0, i);
-    }
-}
+#include "PriorityQueue/T_PriorityQueue.h"
 
 using namespace Dijkstra_Successor;
 using namespace std;

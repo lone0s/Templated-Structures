@@ -1,2 +1,7 @@
 /.idea
 /cmake-build-debug
+main.cpp
+Graph.h
+Sommet.h
+Successeur.h
+CMakeLists.txt
