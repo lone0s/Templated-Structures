@@ -39,14 +39,11 @@ int main() {
     cout << listeSuccesseur;
     cout << sommet;
     Graph graph;
-    cout << graph;
     graph.add(sommet);
-    cout << graph;
     T_List<Sommet> listeSommet;
     listeSommet.add(sommet);
     listeSommet.add(sommet2);
     graph.addSommets(listeSommet);
-    cout << graph;
     return 0;
 
 }

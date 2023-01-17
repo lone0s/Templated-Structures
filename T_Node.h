@@ -17,6 +17,10 @@ public:
             this -> data[i] = array[i];
         }
     };
+    T_Node(const T_Node<T>& node) : size(node.size), data(new T[node.size])  {
+        for (size_t i = 0 ; i < node.size ; ++i)
+            this -> data[i] = node.data[i];
+    }
     // Array's Dynamic Property is defined here
     void add(const T& elem);
     void add(size_t sze, const T elem[]);
@@ -47,6 +51,7 @@ public:
 
 };
 
+/*!!!!!!!!!! Fonction qui coute cher !!!!!!!!!!*/
 template <typename T>
 void T_Node<T>::add(const T& elem) {
     size_t newSize = this -> size + 1;
@@ -56,7 +61,7 @@ void T_Node<T>::add(const T& elem) {
     }
     newArr[newSize - 1] = elem;
     if (data) {
-        delete data;
+        delete[] data;
     }
     this -> data = newArr;
     this -> size = newSize;
@@ -76,12 +81,13 @@ void T_Node<T>::add(const size_t sze, const T elem[]) {
         newArr[i] = elem[i - this -> size];
     if (data)
         //On supprime l'ancien
-        delete data;
+        delete[] data;
     //On le retourne a la liste
     this -> data = newArr;
     this -> size = newSize;
 }
 
+/*!!!!!!!!!! Fonction qui coute cher !!!!!!!!!!*/
 template<typename T>
 void T_Node<T>::add(const T_Node<T> &node) {
     size_t newSize = this -> size + node.size;
@@ -92,7 +98,7 @@ void T_Node<T>::add(const T_Node<T> &node) {
         newArr[i] = node[i - this -> size];
     if (data)
         //On supprime l'ancien
-        delete data;
+        delete[] data;
     //On le retourne a la liste
     this -> data = newArr;
     this -> size = newSize;

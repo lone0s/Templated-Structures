@@ -91,9 +91,11 @@ void T_List<T>::add(const size_t sze, const T elem[]) {
 }
 
 template<typename T>
-void T_List<T>::add(const T_List<T> list) {
+void T_List<T>::add(const T_List<T>& list) {
     if(!this -> start)
-        this -> start = new T_Node<>
+        this -> start = new T_Node<T>(list.start);
+    else
+        this -> start->add(list.start);
 }
 
 
