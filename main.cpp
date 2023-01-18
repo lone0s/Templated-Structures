@@ -4,6 +4,7 @@
 #include "Sommet.h"
 #include "Graph.h"
 #include "PriorityQueue/T_PriorityQueue.h"
+#include "T_Node_dynamic.h"
 
 using namespace Dijkstra_Successor;
 using namespace std;
@@ -86,5 +87,8 @@ int main() {
     } catch (exception& e) {
         cout << "Catched this: " << e.what() << endl;
     }*/
+
+    T_Node<int> node(5);
+    cout << node.get(0) << endl;
     return 0;
 }

@@ -11,7 +11,7 @@ class T_List {
 
 public:
     T_List() : start(nullptr) {};
-    T_List(const size_t numberElems,const T array[]) : start(new T_Node<T>(numberElems,array)) {};
+    explicit T_List(const T& elem) : start(new T_Node<T>(elem)) {};
     ~T_List() {
         if (this -> start)
             delete start;
