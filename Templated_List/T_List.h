@@ -7,60 +7,34 @@
 
 template <typename T>
 class T_List {
-    T_Node<T>* start;
-
-public:
-    T_List() : start(nullptr) {};
-    explicit T_List(const T& elem) : start(new T_Node<T>(elem)) {};
-    ~T_List() {
-        if (this -> start)
-            delete start;
-    }
-    T_List(const T_List<T>& list) {
-        this -> start = new T_Node<T>(list.length(), list.start->getData());
-    }
-
-    T_List<T>& operator= (const T_List<T>& list) {
-        if (this != &list){
-            delete start;
-            this -> start = new T_Node<T>(list.length(),list.start -> getData());
+    private:
+        T_Node<T>* start;
+    public:
+        //Constructeurs
+        T_List() : start(nullptr) {};
+        explicit T_List(const T& elem) : start(new T_Node<T>(elem)) {};
+        T_List(const T_List<T>& list) : start(new T_Node<T>(*list.start)) {};
+        //Destructeur
+        ~T_List() {
+            if (this -> start)
+                delete start;
         }
-        return *this;
-    }
-
-    inline bool isEmpty() const {return this -> start;};
-    inline T get(size_t i) {
-        try {
-            return start->get(i);
-        }
-        catch (std::exception& e){
-            std::cout << "Exception: " << e.what() << std::endl;
-        }
-    }
-    inline T get(size_t i) const {
-        try {
-            return start->get(i);
-        }
-        catch (std::exception& e){
-            std::cout << "Exception: " << e.what() << std::endl;
-        }
-    }
-
-    inline size_t length() const {
-        if (start)
-            return start -> length();
-        else
-            return 0;
-    } ;
-
-    void add(const T& elem);
-    void add(const size_t sze, const T elem[]);
-    void add(const T_List<T>& list);
-
-    template<typename U>
-    friend std::ostream& operator <<(std::ostream& ostream,const T_List<U>& list);
-
+        //Operations
+        inline size_t length() const {return (start ? start->length() : 0);} ;
+        inline bool isEmpty() const {return this -> start;};
+        inline T get(size_t i) const;
+        void add(const T& elem);
+        void add(const T_List<T>& list);
+        void remove(size_t index);
+        //Operateurs
+        T_List<T>& operator= (const T_List<T>& list);
+        template<typename U>
+        friend std::ostream& operator <<(std::ostream& ostream,const T_List<U>& list);
 };
+
+/*********************************************************************************************************************/
+/******************************************* SURCHARGE OPERATEUR *****************************************************/
+/*********************************************************************************************************************/
 
 template<typename T>
 std::ostream& operator << (std::ostream& ostream, const T_List<T>& list) {
@@ -75,6 +49,19 @@ std::ostream& operator << (std::ostream& ostream, const T_List<T>& list) {
 }
 
 template<typename T>
+T_List<T> &T_List<T>::operator=(const T_List<T> &list) {
+    if (this != &list){
+        delete start;
+        this -> start = new T_Node<T>(*list.start);
+    }
+    return *this;
+}
+
+/*********************************************************************************************************************/
+/********************************************** PUBLIC FUNCTIONS *****************************************************/
+/*********************************************************************************************************************/
+
+template<typename T>
 void T_List<T>::add(const T &elem) {
     if (!this -> start)
         this -> start = new T_Node<T>(elem);
@@ -83,19 +70,22 @@ void T_List<T>::add(const T &elem) {
 }
 
 template<typename T>
-void T_List<T>::add(const size_t sze, const T elem[]) {
-    if (!this -> start)
-        this -> start = new T_Node<T>(sze,elem);
+void T_List<T>::add(const T_List<T>& list) {
+    if(!this -> start)
+        this -> start = new T_Node<T>(*list.start);
     else
-        this -> start ->add(sze,elem);
+        this -> start->add(*list.start);
 }
 
 template<typename T>
-void T_List<T>::add(const T_List<T>& list) {
-    if(!this -> start)
-        this -> start = new T_Node<T>(list.start);
-    else
-        this -> start->add(list.start);
+void T_List<T>::remove(size_t index) {
+    if (this -> start)
+        this -> start->remove(index);
+}
+
+template<typename T>
+T T_List<T>::get(size_t i) const {
+    return this -> start->get(i);
 }
 
 

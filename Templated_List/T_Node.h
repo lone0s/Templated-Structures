@@ -22,6 +22,9 @@ public:
     //Constructeurs
     T_Node() : size(0), capacity(BASE_SIZE), data(new T[capacity]) {};
     explicit T_Node(const T& elem) : size(1), capacity(BASE_SIZE), data(new T[capacity]{elem}) {};
+    T_Node(const T_Node<T>& node) : size(node.size), capacity(node.capacity), data(new T[capacity]) {
+        std::move(node.data,node.data + size,data);
+    }
     //Destructeur
     ~T_Node() {
         if(data)
@@ -29,14 +32,17 @@ public:
     }
     //Operations
     T get(size_t i);
+    T* getData() {return this -> data;};
     void add(const T& elem);
     void add(const T_Node<T>& node);
     void remove(size_t index);
     inline size_t length() const {return this -> size;} ;
 };
+
 /*********************************************************************************************************************/
 /********************************************* PRIVATE FUNCTIONS *****************************************************/
 /*********************************************************************************************************************/
+
 template<typename T>
 void T_Node<T>::reallocMore() {
     T* temp = new T[capacity * 2];
@@ -66,7 +72,7 @@ template<typename T>
 T T_Node<T>::get(const size_t i) {
     if (i >= 0 && i < size)
         return data[i];
-    throw std::invalid_argument("List indices go from 0 to" + std::to_string(this->size));
+    throw std::invalid_argument("List indices go from 0 to " + std::to_string(this->size));
 }
 
 template<typename T>
@@ -93,6 +99,6 @@ void T_Node<T>::remove(size_t index) {
             reallocLess();
     }
     else
-        throw std::invalid_argument("List indices go from 0 to" + std::to_string(this->size));
+        throw std::invalid_argument("List indices go from 0 to " + std::to_string(this->size));
 }
 
